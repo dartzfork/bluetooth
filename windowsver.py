@@ -13,6 +13,7 @@ def generate_random_ip():
 def send_packet(ip, port):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(5)
         s.connect((ip, port))
         s.send(b"GET / HTTP/1.1\r\nHost: " + ip.encode() + b"\r\n\r\n")
         s.close()
